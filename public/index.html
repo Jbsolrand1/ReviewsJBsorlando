@@ -1,1 +1,212 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Reviews | Transporte Orlando</title><style>body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:#fafafa;color:#1b2230}header{background:#0b1a2b;color:#fff;padding:24px 16px;border-bottom:4px solid #c9b89a}.wrap{max-width:900px;margin:auto;padding:16px}.card{background:#fff;border-radius:16px;border:1px solid #eee;box-shadow:0 6px 24px rgba(0,0,0,.06);padding:18px}label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea{width:100%;padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;font-size:16px;background:#fff}textarea{min-height:110px;resize:vertical}.rating{display:flex;gap:6px;align-items:center;margin:6px 0 2px}.star{font-size:28px;cursor:pointer;filter:grayscale(1) opacity(.6)} .star.on{filter:none}.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid #e5e7eb;border-radius:999px;padding:8px 12px;background:#fff;cursor:pointer}.btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer;background:#c9b89a}.lang{float:right}.lang button{margin-left:6px;border:1px solid #ddd;border-radius:999px;background:#fff;padding:6px 10px;font-weight:600;cursor:pointer}.active{background:#c9b89a}#thanks{display:none;margin-top:10px;color:green;font-weight:700}.hint{font-size:12px;color:#6b7280}</style></head><body><header><div class="wrap"><div class="lang"><button id="esBtn" class="active">ES</button><button id="enBtn">EN</button></div><h1 id="title">Lo que dicen los pasajeros</h1><p id="subtitle">Traslados puntuales, cómodos y seguros en Orlando y alrededores.</p></div></header><main class="wrap grid"><div class="card"><h2 id="formTitle">Deja tu reseña</h2><form name="transport-reviews" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html"><input type="hidden" name="form-name" value="transport-reviews"><p style="display:none"><label>No llenar: <input name="bot-field"></label></p><label id="l_rating">Calificación</label><div class="rating" id="rating"><span class="star" data-v="1">★</span><span class="star" data-v="2">★</span><span class="star" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span></div><input type="hidden" name="rating" id="ratingInput" required><label id="l_trip">Tipo de servicio</label><select name="trip" required><option value="">--</option><option id="o1">Traslado Aeropuerto (MCO)</option><option id="o2">Puerto Cañaveral (Crucero)</option><option id="o3">Disney / Universal</option><option id="o4">Viaje largo (Miami / Tampa)</option><option id="o5">Otro</option></select><label id="l_aspects">¿Qué aspectos destacarías?</label><div class="chips"><label class="chip"><input type="checkbox" name="aspects" value="Puntualidad"> <span id="a1">Puntualidad</span></label><label class="chip"><input type="checkbox" name="aspects" value="Limpieza"> <span id="a2">Limpieza</span></label><label class="chip"><input type="checkbox" name="aspects" value="Trato y atención"> <span id="a3">Trato y atención</span></label><label class="chip"><input type="checkbox" name="aspects" value="Comunicación"> <span id="a4">Comunicación</span></label><label class="chip"><input type="checkbox" name="aspects" value="Precio"> <span id="a5">Precio</span></label></div><label id="l_name">Nombre (opcional)</label><input type="text" name="name"><label id="l_best">¿Qué fue lo mejor?</label><input type="text" name="best"><label id="l_improve">¿Qué podríamos mejorar?</label><textarea name="improve"></textarea><label id="l_consent">¿Autorizas publicar tu comentario?</label><div class="chips"><label class="chip"><input type="radio" name="consent" value="Sí"> <span id="cYes">Sí, autorizo</span></label><label class="chip"><input type="radio" name="consent" value="No"> <span id="cNo">No</span></label></div><button class="btn" type="submit" id="b_submit">Enviar reseña</button><div id="thanks">¡Gracias por tu reseña!</div><p class="hint" id="privacy">Teléfono/email opcionales. No se publican.</p></form></div><aside style="display:none"></aside></main><script>let lang="es";const T={es:{title:"Lo que dicen los pasajeros",sub:"Traslados puntuales, cómodos y seguros en Orlando y alrededores.",form:"Deja tu reseña",rating:"Calificación",trip:"Tipo de servicio",aspects:"¿Qué aspectos destacarías?",name:"Nombre (opcional)",best:"¿Qué fue lo mejor?",improve:"¿Qué podríamos mejorar?",consent:"¿Autorizas publicar tu comentario?",cYes:"Sí, autorizo",cNo:"No",submit:"Enviar reseña",privacy:"Teléfono/email opcionales. No se publican."},en:{title:"What riders are saying",sub:"Punctual, comfortable and safe rides in Orlando & surroundings.",form:"Leave your review",rating:"Rating",trip:"Service type",aspects:"Which aspects stood out?",name:"Name (optional)",best:"What was the best part?",improve:"What can we improve?",consent:"Do you authorize us to publish your comment?",cYes:"Yes, I authorize",cNo:"No",submit:"Submit review",privacy:"Phone/email optional. Not published."}};function apply(){const d=T[lang];title.textContent=d.title;subtitle.textContent=d.sub;formTitle.textContent=d.form;l_rating.textContent=d.rating;l_trip.textContent=d.trip;l_aspects.textContent=d.aspects;l_name.textContent=d.name;l_best.textContent=d.best;l_improve.textContent=d.improve;l_consent.textContent=d.consent;cYes.textContent=d.cYes;cNo.textContent=d.cNo;b_submit.textContent=d.submit;privacy.textContent=d.privacy;}esBtn.onclick=()=>{lang="es";esBtn.classList.add("active");enBtn.classList.remove("active");apply();}enBtn.onclick=()=>{lang="en";enBtn.classList.add("active");esBtn.classList.remove("active");apply();}apply();const ratingEl=document.getElementById("rating");const ratingInput=document.getElementById("ratingInput");ratingEl.querySelectorAll(".star").forEach(st=>{st.addEventListener("click",()=>{const v=Number(st.dataset.v);ratingInput.value=v;ratingEl.querySelectorAll(".star").forEach(s=>s.classList.toggle("on",Number(s.dataset.v)<=v));});});document.querySelector("form").addEventListener("submit",()=>{document.getElementById("thanks").style.display="block";});</script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reviews | Transporte Orlando</title>
+<meta name="theme-color" content="#0b1a2b">
+<style>
+  :root{--navy:#0b1a2b; --beige:#c9b89a; --ink:#1b2230; --muted:#6b7280;
+    --card:#fff; --bg:#fafafa; --radius:16px; --shadow:0 8px 30px rgba(0,0,0,.08);}
+  *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+  .hero{background:linear-gradient(180deg,var(--navy),#12273f);color:#fff;border-bottom:4px solid var(--beige)}
+  .hero .wrap{max-width:900px;margin:auto;padding:28px 16px;display:flex;justify-content:space-between;align-items:center}
+  h1{margin:0;font-size:clamp(22px,5vw,32px)} p.sub{margin:4px 0 0;color:#d8e1ee}
+  .wrap{max-width:900px;margin:auto;padding:18px 16px}
+  .grid{display:grid;gap:16px}
+  @media(min-width:840px){.grid{grid-template-columns:1.1fr .9fr;gap:24px}}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  label{display:block;font-weight:600;margin:12px 0 6px}
+  input,select,textarea{width:100%;padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;font-size:16px;background:#fff}
+  textarea{min-height:110px;resize:vertical}
+  .rating{display:flex;gap:6px;align-items:center;margin:6px 0 2px}
+  .star{font-size:28px;cursor:pointer;filter:grayscale(1) opacity(.6);border:0;background:none;padding:0}
+  .star.on{filter:none}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+  .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid #e5e7eb;border-radius:999px;padding:8px 12px;background:#fff;cursor:pointer}
+  .hint{font-size:12px;color:var(--muted)}
+  .cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}
+  .btn.primary{background:var(--beige)} .btn.outline{background:#fff;border:2px solid var(--beige)}
+  .reviews{display:grid;gap:12px}
+  .rev{background:#fff;border:1px solid #ececec;border-radius:14px;padding:12px}
+  .rev .meta{font-size:12px;color:#6b7280;margin-bottom:4px}
+  .lang{display:flex;gap:6px}
+  .switch{border:1px solid #ccc;border-radius:999px;overflow:hidden;display:flex}
+  .switch button{border:0;background:#fff;padding:6px 12px;cursor:pointer;font-weight:600}
+  .switch button.active{background:var(--beige)}
+  #thanks{margin-top:12px;font-weight:600;color:green;display:none}
+  #ratingError{color:#b91c1c;display:none}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1 id="t_title">Lo que dicen los pasajeros</h1>
+      <p class="sub" id="t_sub">Traslados puntuales, cómodos y seguros en Orlando y alrededores.</p>
+    </div>
+    <div class="lang">
+      <div class="switch">
+        <button id="btnES" class="active" type="button">ES</button>
+        <button id="btnEN" type="button">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap grid">
+  <!-- FORM -->
+  <section class="card">
+    <h2 id="t_formtitle" style="margin:0 0 8px">Deja tu reseña</h2>
+    <form name="transport-reviews" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html">
+      <input type="hidden" name="form-name" value="transport-reviews">
+      <p style="display:none"><label>Bot: <input name="bot-field"></label></p>
+
+      <label id="t_rating">Calificación</label>
+      <div class="rating" id="rating" aria-label="Rating">
+        <button class="star" data-v="1" type="button" aria-label="1 estrella">★</button>
+        <button class="star" data-v="2" type="button" aria-label="2 estrellas">★</button>
+        <button class="star" data-v="3" type="button" aria-label="3 estrellas">★</button>
+        <button class="star" data-v="4" type="button" aria-label="4 estrellas">★</button>
+        <button class="star" data-v="5" type="button" aria-label="5 estrellas">★</button>
+      </div>
+      <input type="hidden" name="rating" id="ratingInput" required value="">
+      <span id="ratingError" class="hint">Selecciona una calificación.</span>
+
+      <label id="t_trip">Tipo de servicio</label>
+      <select name="trip" required>
+        <option value="">--</option>
+        <option id="o1">Traslado Aeropuerto (MCO)</option>
+        <option id="o2">Puerto Cañaveral (Crucero)</option>
+        <option id="o3">Disney / Universal</option>
+        <option id="o4">Viaje largo (Miami / Tampa)</option>
+        <option id="o5">Otro</option>
+      </select>
+
+      <label id="t_aspects">¿Qué aspectos destacarías?</label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="aspects" value="Puntualidad"> <span id="a1">Puntualidad</span></label>
+        <label class="chip"><input type="checkbox" name="aspects" value="Limpieza"> <span id="a2">Limpieza</span></label>
+        <label class="chip"><input type="checkbox" name="aspects" value="Atención"> <span id="a3">Trato y atención</span></label>
+        <label class="chip"><input type="checkbox" name="aspects" value="Comunicación"> <span id="a4">Comunicación</span></label>
+        <label class="chip"><input type="checkbox" name="aspects" value="Precio"> <span id="a5">Precio</span></label>
+      </div>
+
+      <label id="t_name">Nombre (opcional)</label>
+      <input type="text" name="name">
+
+      <label id="t_best">¿Qué fue lo mejor?</label>
+      <input type="text" name="best">
+
+      <label id="t_improve">¿Qué podríamos mejorar?</label>
+      <textarea name="improve"></textarea>
+
+      <label id="t_consent">¿Autorizas publicar tu comentario?</label>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="consent" value="Sí"> <span id="cYes">Sí, autorizo</span></label>
+        <label class="chip"><input type="radio" name="consent" value="No"> <span id="cNo">No</span></label>
+      </div>
+
+      <div class="cta">
+        <button class="btn primary" type="submit" id="t_submit">Enviar reseña</button>
+      </div>
+      <div id="thanks">¡Gracias por tu reseña!</div>
+    </form>
+  </section>
+
+  <!-- FEED -->
+  <aside class="card">
+    <h2 id="t_feedtitle" style="margin:0 0 8px">Últimas reseñas (positivas)</h2>
+    <div class="reviews" id="reviews"></div>
+    <p class="hint" id="t_feedhint">Mostramos hasta 4 reseñas con calificación ≥ 4 y consentimiento “Sí”.</p>
+  </aside>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let lang="es";
+  const dict={
+    es:{title:"Lo que dicen los pasajeros",sub:"Traslados puntuales, cómodos y seguros en Orlando y alrededores.",form:"Deja tu reseña",rating:"Calificación",trip:"Tipo de servicio",aspects:"¿Qué aspectos destacarías?",name:"Nombre (opcional)",best:"¿Qué fue lo mejor?",improve:"¿Qué podríamos mejorar?",consent:"¿Autorizas publicar tu comentario?",cYes:"Sí, autorizo",cNo:"No",submit:"Enviar reseña",feed:"Últimas reseñas (positivas)",feedhint:"Mostramos hasta 4 reseñas con calificación ≥ 4 y consentimiento “Sí”.",thanks:"¡Gracias por tu reseña!",ratingError:"Selecciona una calificación."},
+    en:{title:"What riders are saying",sub:"Punctual, comfortable and safe rides in Orlando & surroundings.",form:"Leave your review",rating:"Rating",trip:"Service type",aspects:"Which aspects stood out?",name:"Name (optional)",best:"What was the best part?",improve:"What can we improve?",consent:"Do you authorize us to publish your comment?",cYes:"Yes, I authorize",cNo:"No",submit:"Submit review",feed:"Latest positive reviews",feedhint:"We show up to 4 reviews with rating ≥ 4 and consent “Yes”.",thanks:"Thanks for your review!",ratingError:"Please select a rating."}
+  };
+  const $ = (id) => document.getElementById(id);
+  function applyText(){
+    const d = dict[lang];
+    $("t_title").textContent=d.title;
+    $("t_sub").textContent=d.sub;
+    $("t_formtitle").textContent=d.form;
+    $("t_rating").textContent=d.rating;
+    $("t_trip").textContent=d.trip;
+    $("t_aspects").textContent=d.aspects;
+    $("t_name").textContent=d.name;
+    $("t_best").textContent=d.best;
+    $("t_improve").textContent=d.improve;
+    $("t_consent").textContent=d.consent;
+    $("cYes").textContent=d.cYes;
+    $("cNo").textContent=d.cNo;
+    $("t_submit").textContent=d.submit;
+    $("t_feedtitle").textContent=d.feed;
+    $("t_feedhint").textContent=d.feedhint;
+    $("ratingError").textContent=d.ratingError;
+  }
+  const btnES=$("btnES"), btnEN=$("btnEN");
+  if(btnES && btnEN){
+    btnES.addEventListener("click",()=>{lang="es";btnES.classList.add("active");btnEN.classList.remove("active");applyText();});
+    btnEN.addEventListener("click",()=>{lang="en";btnEN.classList.add("active");btnES.classList.remove("active");applyText();});
+  }
+  applyText();
+
+  // --- Rating ---
+  const stars = Array.from(document.querySelectorAll('#rating .star'));
+  const ratingInput = $("ratingInput");
+  const ratingError = $("ratingError");
+  function setRating(v){
+    ratingInput.value = String(v);
+    stars.forEach(s => s.classList.toggle('on', Number(s.dataset.v) <= v));
+    if (ratingError) ratingError.style.display = 'none';
+  }
+  stars.forEach(s => s.addEventListener('click', () => setRating(Number(s.dataset.v))));
+
+  // --- Submit guard + thanks + optional feed refresh ---
+  const form = document.querySelector('form[name="transport-reviews"]');
+  if (form){
+    form.addEventListener('submit', (e) => {
+      if (!ratingInput.value){
+        e.preventDefault();
+        if (ratingError) ratingError.style.display = 'inline';
+        return false;
+      }
+      const thanks = $("thanks");
+      if (thanks){ thanks.textContent = dict[lang].thanks; thanks.style.display = 'block'; }
+      // Si decides NO redirigir a success.html y quedarte en la misma página:
+      // setTimeout(() => { if (typeof loadReviews === 'function') loadReviews(); }, 2500);
+    });
+  }
+
+  // --- Feed (si usas funciones) ---
+  async function loadReviews(){
+    try{
+      const res=await fetch("/api/listReviews",{cache:"no-store"});
+      if(!res.ok) throw new Error("bad");
+      const data=await res.json();
+      const box=$("reviews");
+      if(!Array.isArray(data)||!data.length){box.innerHTML='<p class="hint">'+(lang==="es"?"Aún no hay reseñas.":"No reviews yet.")+'</p>';return;}
+      box.innerHTML=data.map(r=>`
+        <div class="rev">
+          <div class="meta">⭐ ${r.rating}/5 • ${r.trip}${r.name? ' • '+r.name:''}</div>
+          <div>${r.best?r.best:""}</div>
+          ${r.improve?`<div class="hint">${lang==="es"?"Sugerencia:":"Suggestion:"} ${r.improve}</div>`:""}
+        </div>
+      `).join('');
+    }catch(e){
+      const box=$("reviews");
+      if(box) box.innerHTML='<p class="hint">'+(lang==="es"?"No se pudo cargar el feed.":"Could not load feed.")+'</p>';
+    }
+  }
+  // Si tienes funciones y variables listas, descomenta:
+  // loadReviews();
+});
+</script>
+</body>
+</html>
