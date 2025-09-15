@@ -30,12 +30,12 @@ h1{margin:0 0 8px}p{margin:.5em 0}
   </div>
 <script>
 const GOOGLE_REVIEW_URL=""; // ej: https://g.page/r/TU-CODIGO/review
-const T_ES={title:"¡Gracias por tu reseña! 💛",p1:"Tu opinión nos ayuda a mejorar cada traslado.",p2:"Si deseas, también puedes publicarla en Google Reviews.",g:"Abrir Google Reviews"};
-const T_EN={title:"Thanks for your review! 💛",p1:"Your feedback helps us improve every ride.",p2:"If you want, you can also publish it on Google Reviews.",g:"Open Google Reviews"};
-function setLang(d){title.textContent=d.title;p1.textContent=d.p1;p2.textContent=d.p2;g.textContent=d.g;}
-es.onclick=()=>{setLang(T_ES);es.classList.add('active');en.classList.remove('active');}
-en.onclick=()=>{setLang(T_EN);en.classList.add('active');es.classList.remove('active');}
-if(GOOGLE_REVIEW_URL){g.href=GOOGLE_REVIEW_URL;g.style.display='inline-block';}
+const T_ES={title:"¡Gracias por tu reseña! 💛", p1:"Tu opinión nos ayuda a mejorar cada traslado.", p2:"Si deseas, también puedes publicarla en Google Reviews.", g:"Abrir Google Reviews"};
+const T_EN={title:"Thanks for your review! 💛", p1:"Your feedback helps us improve every ride.", p2:"If you want, you can also publish it on Google Reviews.", g:"Open Google Reviews"};
+function setLang(d){ title.textContent=d.title; p1.textContent=d.p1; p2.textContent=d.p2; g.textContent=d.g; }
+es.onclick=()=>{ setLang(T_ES); es.classList.add('active'); en.classList.remove('active'); }
+en.onclick=()=>{ setLang(T_EN); en.classList.add('active'); es.classList.remove('active'); }
+if(GOOGLE_REVIEW_URL){ g.href=GOOGLE_REVIEW_URL; g.style.display='inline-block'; }
 </script>
 </body>
 </html>

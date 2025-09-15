@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -37,6 +38,7 @@
   .switch button.active{background:var(--beige)}
   #thanks{margin-top:12px;font-weight:600;color:green;display:none}
   #ratingError{color:#b91c1c;display:none}
+  #diag{margin-top:8px;font-size:12px;color:#b45309;display:none}
 </style>
 </head>
 <body>
@@ -94,13 +96,19 @@
       </div>
 
       <label id="t_name">Nombre (opcional)</label>
-      <input type="text" name="name">
+      <input type="text" name="name" placeholder="Tu nombre">
+
+      <label id="t_phone">Teléfono (opcional)</label>
+      <input type="tel" name="phone" placeholder="+1 407 000 0000">
+
+      <label id="t_email">Email (opcional)</label>
+      <input type="email" name="email" placeholder="tu@email.com">
 
       <label id="t_best">¿Qué fue lo mejor?</label>
-      <input type="text" name="best">
+      <input type="text" name="best" placeholder="Lo que más te gustó">
 
       <label id="t_improve">¿Qué podríamos mejorar?</label>
-      <textarea name="improve"></textarea>
+      <textarea name="improve" placeholder="Sugerencias (opcional)"></textarea>
 
       <label id="t_consent">¿Autorizas publicar tu comentario?</label>
       <div class="chips">
@@ -120,6 +128,7 @@
     <h2 id="t_feedtitle" style="margin:0 0 8px">Últimas reseñas (positivas)</h2>
     <div class="reviews" id="reviews"></div>
     <p class="hint" id="t_feedhint">Mostramos hasta 4 reseñas con calificación ≥ 4 y consentimiento “Sí”.</p>
+    <div id="diag"></div>
   </aside>
 </main>
 
@@ -127,28 +136,18 @@
 document.addEventListener('DOMContentLoaded', () => {
   let lang="es";
   const dict={
-    es:{title:"Lo que dicen los pasajeros",sub:"Traslados puntuales, cómodos y seguros en Orlando y alrededores.",form:"Deja tu reseña",rating:"Calificación",trip:"Tipo de servicio",aspects:"¿Qué aspectos destacarías?",name:"Nombre (opcional)",best:"¿Qué fue lo mejor?",improve:"¿Qué podríamos mejorar?",consent:"¿Autorizas publicar tu comentario?",cYes:"Sí, autorizo",cNo:"No",submit:"Enviar reseña",feed:"Últimas reseñas (positivas)",feedhint:"Mostramos hasta 4 reseñas con calificación ≥ 4 y consentimiento “Sí”.",thanks:"¡Gracias por tu reseña!",ratingError:"Selecciona una calificación."},
-    en:{title:"What riders are saying",sub:"Punctual, comfortable and safe rides in Orlando & surroundings.",form:"Leave your review",rating:"Rating",trip:"Service type",aspects:"Which aspects stood out?",name:"Name (optional)",best:"What was the best part?",improve:"What can we improve?",consent:"Do you authorize us to publish your comment?",cYes:"Yes, I authorize",cNo:"No",submit:"Submit review",feed:"Latest positive reviews",feedhint:"We show up to 4 reviews with rating ≥ 4 and consent “Yes”.",thanks:"Thanks for your review!",ratingError:"Please select a rating."}
+    es:{title:"Lo que dicen los pasajeros",sub:"Traslados puntuales, cómodos y seguros en Orlando y alrededores.",form:"Deja tu reseña",rating:"Calificación",trip:"Tipo de servicio",aspects:"¿Qué aspectos destacarías?",name:"Nombre (opcional)",best:"¿Qué fue lo mejor?",improve:"¿Qué podríamos mejorar?",consent:"¿Autorizas publicar tu comentario?",cYes:"Sí, autorizo",cNo:"No",submit:"Enviar reseña",feed:"Últimas reseñas (positivas)",feedhint:"Mostramos hasta 4 reseñas con calificación ≥ 4 y consentimiento “Sí”.",thanks:"¡Gracias por tu reseña!",ratingError:"Selecciona una calificación.",phone:"Teléfono (opcional)",email:"Email (opcional)"},
+    en:{title:"What riders are saying",sub:"Punctual, comfortable and safe rides in Orlando & surroundings.",form:"Leave your review",rating:"Rating",trip:"Service type",aspects:"Which aspects stood out?",name:"Name (optional)",best:"What was the best part?",improve:"What can we improve?",consent:"Do you authorize us to publish your comment?",cYes:"Yes, I authorize",cNo:"No",submit:"Submit review",feed:"Latest positive reviews",feedhint:"We show up to 4 reviews with rating ≥ 4 and consent “Yes”.",thanks:"Thanks for your review!",ratingError:"Please select a rating.",phone:"Phone (optional)",email:"Email (optional)"}
   };
   const $ = (id) => document.getElementById(id);
   function applyText(){
     const d = dict[lang];
-    $("t_title").textContent=d.title;
-    $("t_sub").textContent=d.sub;
-    $("t_formtitle").textContent=d.form;
-    $("t_rating").textContent=d.rating;
-    $("t_trip").textContent=d.trip;
-    $("t_aspects").textContent=d.aspects;
-    $("t_name").textContent=d.name;
-    $("t_best").textContent=d.best;
-    $("t_improve").textContent=d.improve;
-    $("t_consent").textContent=d.consent;
-    $("cYes").textContent=d.cYes;
-    $("cNo").textContent=d.cNo;
-    $("t_submit").textContent=d.submit;
-    $("t_feedtitle").textContent=d.feed;
-    $("t_feedhint").textContent=d.feedhint;
-    $("ratingError").textContent=d.ratingError;
+    $("t_title").textContent=d.title; $("t_sub").textContent=d.sub; $("t_formtitle").textContent=d.form;
+    $("t_rating").textContent=d.rating; $("t_trip").textContent=d.trip; $("t_aspects").textContent=d.aspects;
+    $("t_name").textContent=d.name; $("t_best").textContent=d.best; $("t_improve").textContent=d.improve;
+    $("t_consent").textContent=d.consent; $("cYes").textContent=d.cYes; $("cNo").textContent=d.cNo;
+    $("t_submit").textContent=d.submit; $("t_feedtitle").textContent=d.feed; $("t_feedhint").textContent=d.feedhint;
+    $("ratingError").textContent=d.ratingError; $("t_phone").textContent=d.phone; $("t_email").textContent=d.email;
   }
   const btnES=$("btnES"), btnEN=$("btnEN");
   if(btnES && btnEN){
@@ -168,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   stars.forEach(s => s.addEventListener('click', () => setRating(Number(s.dataset.v))));
 
-  // --- Submit guard + thanks + optional feed refresh ---
+  // --- Submit guard + thanks ---
   const form = document.querySelector('form[name="transport-reviews"]');
   if (form){
     form.addEventListener('submit', (e) => {
@@ -179,19 +178,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const thanks = $("thanks");
       if (thanks){ thanks.textContent = dict[lang].thanks; thanks.style.display = 'block'; }
-      // Si decides NO redirigir a success.html y quedarte en la misma página:
-      // setTimeout(() => { if (typeof loadReviews === 'function') loadReviews(); }, 2500);
     });
   }
 
-  // --- Feed (si usas funciones) ---
+  // --- Feed (functions) ---
   async function loadReviews(){
+    const diag=$("diag");
     try{
       const res=await fetch("/api/listReviews",{cache:"no-store"});
-      if(!res.ok) throw new Error("bad");
+      if(!res.ok){
+        if(diag){diag.style.display='block'; diag.textContent = 'API error: ' + res.status;}
+        return;
+      }
       const data=await res.json();
       const box=$("reviews");
-      if(!Array.isArray(data)||!data.length){box.innerHTML='<p class="hint">'+(lang==="es"?"Aún no hay reseñas.":"No reviews yet.")+'</p>';return;}
+      if(!Array.isArray(data)||!data.length){
+        box.innerHTML='<p class="hint">'+(lang==="es"?"Aún no hay reseñas.":"No reviews yet.")+'</p>';
+        return;
+      }
       box.innerHTML=data.map(r=>`
         <div class="rev">
           <div class="meta">⭐ ${r.rating}/5 • ${r.trip}${r.name? ' • '+r.name:''}</div>
@@ -200,12 +204,10 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `).join('');
     }catch(e){
-      const box=$("reviews");
-      if(box) box.innerHTML='<p class="hint">'+(lang==="es"?"No se pudo cargar el feed.":"Could not load feed.")+'</p>';
+      if(diag){diag.style.display='block'; diag.textContent = 'Fetch failed: ' + e.message;}
     }
   }
-  // Si tienes funciones y variables listas, descomenta:
-  // loadReviews();
+  loadReviews();
 });
 </script>
 </body>

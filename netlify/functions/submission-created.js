@@ -7,13 +7,14 @@ export const handler = async (event) => {
     const trip = data.trip;
     const name = data.name || "";
     const phone = data.phone || "";
+    const email = data.email || "";
     const best = data.best || "";
     const improve = data.improve || "";
     const consent = data.consent || "";
 
     // Email via SendGrid (optional)
     if(process.env.SENDGRID_API_KEY && process.env.NOTIFY_TO_EMAIL){
-      const content = `Nueva reseña / New review:\n⭐ ${rating}/5\nTipo/Type: ${trip}\nNombre/Name: ${name}\nTel: ${phone}\nMejor/Best: ${best}\nMejorar/Improve: ${improve}\nConsent: ${consent}`;
+      const content = `Nueva reseña / New review:\n⭐ ${rating}/5\nTipo/Type: ${trip}\nNombre/Name: ${name}\nTel: ${phone}\nEmail: ${email}\nMejor/Best: ${best}\nMejorar/Improve: ${improve}\nConsent: ${consent}`;
       await fetch("https://api.sendgrid.com/v3/mail/send", {
         method: "POST",
         headers: {
